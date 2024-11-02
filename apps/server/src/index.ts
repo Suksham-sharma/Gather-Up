@@ -1,5 +1,6 @@
 import express from "express";
 import { apiRouterV1 } from "./routes/v1";
+import prismaClient from "@repo/db/client";
 
 const app = express();
 app.listen(express.json());

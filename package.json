@@ -8,6 +8,7 @@
     "format": "prettier --write \"**/*.{ts,tsx,md}\""
   },
   "devDependencies": {
+    "@types/jsonwebtoken": "^9.0.7",
     "prettier": "^3.2.5",
     "turbo": "^2.2.3",
     "typescript": "5.5.4"
@@ -19,6 +20,5 @@
   "workspaces": [
     "apps/*",
     "packages/*"
-  ],
-  "dependencies": {}
+  ]
 }

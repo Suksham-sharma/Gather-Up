@@ -7,7 +7,7 @@ import prismaClient from "@repo/db/client";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
-const JWT_SECRET = "secret";
+export const JWT_SECRET = "secret";
 export const apiRouterV1 = Router();
 
 apiRouterV1.post("/signup", async (req: Request, res: Response) => {

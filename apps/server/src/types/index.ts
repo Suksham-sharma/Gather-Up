@@ -12,3 +12,18 @@ export const signInData = z.object({
   username: z.string(),
   password: z.string(),
 });
+
+export interface UserData {
+  id: string;
+  username: string;
+  role: string;
+}
+
+declare global {
+  namespace Express {
+    export interface Request {
+      userId?: string;
+      role?: string;
+    }
+  }
+}

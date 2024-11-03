@@ -40,7 +40,7 @@ model spaceElements {
   spaceId   String
   x         Int
   y         Int
-  space     Space   @relation(fields: [spaceId], references: [id])
+  space     Space?  @relation(fields: [spaceId], references: [id])
   element   Element @relation(fields: [elementId], references: [id])
 }
 
@@ -58,6 +58,7 @@ model Map {
   width       Int
   height      Int
   name        String
+  thumbnail   String?
   mapElements mapElements[]
 }
 

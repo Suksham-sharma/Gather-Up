@@ -17,16 +17,15 @@ export const isUserAdmninMiddleware = (
     }
 
     const userInfo = jwt.verify(authToken, JWT_SECRET) as UserData;
-    console.log(userInfo);
 
     if (userInfo.role !== "Admin") {
       throw new Error("Don't have the required permissions");
     }
-    console.log("here");
 
     req.userId = userInfo.id;
     next();
   } catch (error: any) {
     res.status(403).json({ message: error.message });
+    return;
   }
 };

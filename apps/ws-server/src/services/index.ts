@@ -1,19 +1,16 @@
-import WebSocket, { RawData } from "ws";
-import { IncomingMessageRequestData, userJwtData } from "../types";
-import jwt from "jsonwebtoken";
-import { ELEMENTS, SPACES } from "../db";
+import { CurrentMap, ELEMENTS, POSITIONS, SPACES } from "../db";
 
-// setUp currentMap
 function handleSetUpCurrentMap(spaceId: string) {
   // make a space grid with the default as false , width x height , where width and height are the space width and height
 
   const space = SPACES.get(spaceId);
+  const spacePosition = POSITIONS[spaceId];
 
   if (!space) {
     return;
   }
 
-  const { width, height } = space; // width: height: string
+  const { width, height } = space;
 
   const [spaceWidth, spaceHeight] = [Number(width), Number(height)];
 
@@ -22,7 +19,7 @@ function handleSetUpCurrentMap(spaceId: string) {
   }
 
   const updatedSpaceGrid = Array.from({ length: spaceHeight }, () => {
-    return Array.from({ length: spaceWidth }, () => 0);
+    return Array.from({ length: spaceWidth }, () => false);
   });
 
   if (!updatedSpaceGrid) {
@@ -58,9 +55,18 @@ function handleSetUpCurrentMap(spaceId: string) {
           xCord >= 0 &&
           xCord < spaceWidth
         ) {
-          updatedSpaceGrid[yCord]![xCord] = 1;
+          updatedSpaceGrid[yCord]![xCord] = true;
         }
       }
     }
+
+    for (const userId in spacePosition) {
+      const userPosition = spacePosition[userId];
+
+      if (!userPosition) return;
+      updatedSpaceGrid[userPosition.y]![userPosition.x] = true;
+    }
+
+    CurrentMap.set(spaceId, updatedSpaceGrid);
   }
 }

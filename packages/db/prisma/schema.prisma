@@ -24,14 +24,14 @@ model User {
 }
 
 model Space {
-  id            String          @id @unique @default(cuid())
-  name          String
-  width         Int
-  height        Int?
-  thumbnail     String?
-  creatorId     String
-  creator       User            @relation(fields: [creatorId], references: [id])
-  spaceElements spaceElements[]
+  id        String          @id @unique @default(cuid())
+  name      String
+  width     Int
+  height    Int
+  thumbnail String?
+  creatorId String
+  creator   User            @relation(fields: [creatorId], references: [id])
+  elements  spaceElements[]
 }
 
 model spaceElements {
@@ -49,6 +49,7 @@ model Element {
   width         Int
   height        Int
   imageUrl      String
+  static        Boolean
   spaceElements spaceElements[]
   mapElements   mapElements[]
 }
@@ -69,7 +70,7 @@ model mapElements {
   x         Int?
   y         Int?
   map       Map      @relation(fields: [mapId], references: [id])
-  element   Element? @relation(fields: [elementId], references: [id])
+  elements  Element? @relation(fields: [elementId], references: [id])
 }
 
 model Avatar {

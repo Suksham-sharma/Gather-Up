@@ -27,6 +27,7 @@ adminRouter.post(
           width: width,
           height: height,
           imageUrl: imageUrl,
+          static: false,
         },
       });
 
